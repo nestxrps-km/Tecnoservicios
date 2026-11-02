@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tecnoservicios | Reparación, Mantenimiento e Instalación de Office</title>
+<meta name="description" content="Reparación y mantenimiento de computadoras e instalación de paquetería Office. Público en general $500, estudiantes $390.">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#121936; --card:#161e3f; --text:#eef1ff; --muted:#a6b0d6;
+  --brand:#6c5ce7; --brand2:#00d4ff; --accent:#ff7a59; --wa:#25d366; --ok:#2ee59d;
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+section{padding:90px 0;position:relative}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin-bottom:12px}
+.sub{color:var(--muted);max-width:620px;margin-bottom:40px}
+.grad{background:linear-gradient(90deg,var(--brand2),var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,16,32,.7);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:8px}
+.logo i{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));font-style:normal;animation:float 3s ease-in-out infinite}
+nav ul{display:flex;gap:6px;list-style:none}
+nav ul a{position:relative;padding:8px 14px;border-radius:999px;color:var(--muted);transition:.3s;font-size:.95rem}
+nav ul a::after{content:"";position:absolute;left:50%;bottom:2px;width:0;height:2px;background:var(--brand2);transition:.3s;transform:translateX(-50%)}
+nav ul a:hover{color:#fff}
+nav ul a:hover::after{width:60%}
+@media(max-width:720px){nav ul{display:none}}
+
+/* BUTTONS */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border:0;border-radius:999px;font:700 1rem inherit;font-family:inherit;color:#fff;cursor:pointer;overflow:hidden;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 8px 24px rgba(108,92,231,.4);transition:transform .25s,box-shadow .25s}
+.btn::before{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 14px 34px rgba(0,212,255,.35)}
+.btn:hover::before{left:140%}
+.btn:active{transform:scale(.96)}
+.btn.wa{background:linear-gradient(135deg,#1ebe5a,var(--wa));box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.25);box-shadow:none}
+.btn.ghost:hover{border-color:var(--brand2);background:rgba(0,212,255,.08)}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:rip .6s linear;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+@keyframes float{50%{transform:translateY(-6px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}100%{box-shadow:0 0 0 22px rgba(37,211,102,0)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;overflow:hidden;
+  background:radial-gradient(900px 500px at 80% 10%,rgba(108,92,231,.35),transparent 60%),radial-gradient(700px 500px at 0% 90%,rgba(0,212,255,.2),transparent 60%),var(--bg)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.badge{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(46,229,157,.12);color:var(--ok);font-size:.85rem;font-weight:600;margin-bottom:18px;border:1px solid rgba(46,229,157,.3)}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05;margin-bottom:18px}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:520px;margin-bottom:30px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.stats{display:flex;gap:30px;margin-top:40px;flex-wrap:wrap}
+.stats b{display:block;font-size:1.7rem}
+.stats span{color:var(--muted);font-size:.85rem}
+.visual{position:relative;height:420px}
+.screen{position:absolute;inset:30px 20px;border-radius:22px;background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.5);padding:22px;animation:float 5s ease-in-out infinite}
+.dots span{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:#ff5f56}
+.dots span:nth-child(2){background:#ffbd2e}.dots span:nth-child(3){background:#27c93f}
+.apps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+.app{padding:16px;border-radius:14px;font-weight:700;text-align:center;transition:.3s}
+.app:hover{transform:scale(1.08) rotate(-2deg)}
+.app small{display:block;font-weight:400;opacity:.85}
+.app.w{background:#2b579a}.app.x{background:#217346}.app.p{background:#d24726}.app.o{background:#0078d4}
+.bar{height:8px;border-radius:8px;background:rgba(255,255,255,.1);margin-top:22px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand2),var(--ok));animation:load 3.5s ease-in-out infinite}
+@keyframes load{0%{width:0}80%,100%{width:100%}}
+.chip{position:absolute;padding:10px 16px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,.12);font-size:.85rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.4);animation:float 4s ease-in-out infinite}
+.chip.a{top:0;right:0}.chip.b{bottom:10px;left:0;animation-delay:1s}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.visual{height:340px}}
+
+/* TABS */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;position:relative}
+.tab{padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--muted);font:600 .95rem inherit;font-family:inherit;cursor:pointer;transition:.3s}
+.tab:hover{color:#fff;transform:translateY(-3px);border-color:var(--brand2)}
+.tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(108,92,231,.45)}
+.panel{display:none;grid-template-columns:1fr 1fr;gap:30px;align-items:center;background:var(--card);border-radius:var(--radius);padding:34px;border:1px solid rgba(255,255,255,.08)}
+.panel.active{display:grid;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.panel h3{font-size:1.5rem;margin-bottom:10px}
+.panel p{color:var(--muted);margin-bottom:16px}
+.panel ul{list-style:none}
+.panel li{padding:6px 0 6px 28px;position:relative}
+.panel li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+.big{font-size:6rem;text-align:center;animation:float 3s ease-in-out infinite}
+@media(max-width:720px){.panel.active{grid-template-columns:1fr}.big{font-size:4rem}}
+
+/* PRICING */
+#costos{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;max-width:800px}
+.plan{position:relative;background:var(--card);border-radius:var(--radius);padding:34px 30px;border:1px solid rgba(255,255,255,.1);transition:transform .35s,box-shadow .35s,border-color .35s}
+.plan:hover{transform:translateY(-10px) rotate(-.5deg);box-shadow:0 24px 60px rgba(0,0,0,.45);border-color:var(--brand2)}
+.plan.hot{border-color:var(--accent);background:linear-gradient(160deg,#241b4a,var(--card))}
+.tag{position:absolute;top:-14px;right:20px;padding:5px 14px;border-radius:999px;background:var(--accent);font-size:.78rem;font-weight:800;animation:float 2.5s ease-in-out infinite}
+.plan h3{font-size:1.2rem;color:var(--muted);margin-bottom:6px}
+.price{font-size:3.4rem;font-weight:800;line-height:1;margin:10px 0 4px}
+.price sup{font-size:1.4rem;vertical-align:top;margin-right:2px}
+.price small{font-size:1rem;color:var(--muted);font-weight:500}
+.plan ul{list-style:none;margin:22px 0 28px}
+.plan li{padding:6px 0 6px 28px;position:relative;color:var(--muted)}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+.plan .btn{width:100%;justify-content:center}
+.note{margin-top:22px;color:var(--muted);font-size:.9rem}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;counter-reset:s}
+.step{background:var(--card);padding:28px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.08);counter-increment:s;transition:.3s}
+.step:hover{transform:translateY(-8px);border-color:var(--brand)}
+.step::before{content:counter(s);display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));font-weight:800;margin-bottom:14px}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* FAQ */
+.faq details{background:var(--card);border-radius:14px;margin-bottom:12px;padding:0 22px;border:1px solid rgba(255,255,255,.08);transition:.3s}
+.faq details:hover{border-color:var(--brand2)}
+.faq summary{cursor:pointer;padding:18px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";font-size:1.4rem;transition:.3s;color:var(--brand2)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding-bottom:18px}
+
+/* CONTACT / FOOTER */
+.contact{text-align:center;background:radial-gradient(600px 300px at 50% 0,rgba(37,211,102,.18),transparent 70%)}
+.contact .cta{justify-content:center}
+footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid rgba(255,255,255,.06)}
+
+/* FLOATING WA */
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;font-size:1.9rem;animation:pulse 2s infinite;transition:transform .3s}
+.fab:hover{transform:scale(1.15) rotate(10deg)}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rev.show{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#inicio" class="logo"><i>⚡</i> Tecnoservicios</a>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#costos">Costos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <span class="badge">● Atención rápida y garantizada</span>
+      <h1>Tu computadora <span class="grad">como nueva</span>, con Office listo para trabajar</h1>
+      <p>Reparación, mantenimiento e instalación de paquetería Office. Para tu casa, tu oficina o tu escuela.</p>
+      <div class="cta">
+        <a href="#costos" class="btn">Ver costos →</a>
+        <a href="#" class="btn wa" data-wa="Hola, quiero información sobre sus servicios.">💬 Escríbenos</a>
+      </div>
+      <div class="stats">
+        <div><b>$390</b><span>Estudiantes</span></div>
+        <div><b>$500</b><span>Público en general</span></div>
+        <div><b>24 h</b><span>Respuesta por WhatsApp</span></div>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="chip a">🛠️ Mantenimiento</div>
+      <div class="screen">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="apps">
+          <div class="app w">Word<small>Documentos</small></div>
+          <div class="app x">Excel<small>Hojas de cálculo</small></div>
+          <div class="app p">PowerPoint<small>Presentaciones</small></div>
+          <div class="app o">Outlook<small>Correo</small></div>
+        </div>
+        <div class="bar"><i></i></div>
+        <p style="margin-top:10px;font-size:.85rem;color:var(--muted)">Instalando Office…</p>
+      </div>
+      <div class="chip b">💻 Reparación</div>
+    </div>
+  </div>
+</header>
+
+<section id="servicios">
+  <div class="wrap rev">
+    <h2>Lo que <span class="grad">hacemos</span></h2>
+    <p class="sub">Elige una pestaña para conocer cada servicio.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="t1">💻 Reparación</button>
+      <button class="tab" data-tab="t2">🧹 Mantenimiento</button>
+      <button class="tab" data-tab="t3">📦 Instalación Office</button>
+    </div>
+
+    <div class="panel active" id="t1">
+      <div>
+        <h3>Reparación de equipos</h3>
+        <p>Diagnosticamos y resolvemos fallas de software y hardware en laptops y PC de escritorio.</p>
+        <ul>
+          <li>Equipo lento o que no enciende</li>
+          <li>Eliminación de virus y malware</li>
+          <li>Reinstalación de sistema operativo</li>
+          <li>Cambio de piezas y componentes</li>
+        </ul>
+        <br><a href="#" class="btn wa" data-wa="Hola, quiero cotizar una REPARACIÓN de mi equipo.">Cotizar reparación</a>
+      </div>
+      <div class="big">🖥️</div>
+    </div>
+
+    <div class="panel" id="t2">
+      <div>
+        <h3>Mantenimiento preventivo</h3>
+        <p>Alarga la vida de tu equipo y evita fallas inesperadas con una limpieza y optimización completa.</p>
+        <ul>
+          <li>Limpieza interna y cambio de pasta térmica</li>
+          <li>Optimización del sistema</li>
+          <li>Actualización de controladores y programas</li>
+          <li>Respaldo de información</li>
+        </ul>
+        <br><a href="#" class="btn wa" data-wa="Hola, quiero cotizar un MANTENIMIENTO para mi equipo.">Cotizar mantenimiento</a>
+      </div>
+      <div class="big">🧰</div>
+    </div>
+
+    <div class="panel" id="t3">
+      <div>
+        <h3>Instalación de paquetería Office</h3>
+        <p>Word, Excel, PowerPoint y más, instalados y configurados para que empieces a trabajar de inmediato.</p>
+        <ul>
+          <li>Instalación completa y activación</li>
+          <li>Configuración inicial</li>
+          <li>Precio especial para estudiantes</li>
+          <li>Soporte posterior a la instalación</li>
+        </ul>
+        <br><a href="#costos" class="btn">Ver precios</a>
+      </div>
+      <div class="big">📄</div>
+    </div>
+  </div>
+</section>
+
+<section id="costos">
+  <div class="wrap rev">
+    <h2>Costos de <span class="grad">instalación de Office</span></h2>
+    <p class="sub">Precios claros, sin sorpresas. Al dar clic en “Comprar” se abre WhatsApp con tu pedido listo.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>👤 Público en general</h3>
+        <div class="price"><sup>$</sup>500 <small>MXN</small></div>
+        <ul>
+          <li>Instalación de paquetería Office</li>
+          <li>Activación y configuración</li>
+          <li>Soporte posterior</li>
+        </ul>
+        <button class="btn wa" data-wa="Hola, quiero comprar la INSTALACIÓN DE OFFICE – Público en general ($500).">Comprar por WhatsApp</button>
+      </div>
+      <div class="plan hot">
+        <span class="tag">🎓 Mejor precio</span>
+        <h3>🎓 Estudiantes</h3>
+        <div class="price"><sup>$</sup>390 <small>MXN</small></div>
+        <ul>
+          <li>Instalación de paquetería Office</li>
+          <li>Activación y configuración</li>
+          <li>Soporte posterior</li>
+        </ul>
+        <button class="btn wa" data-wa="Hola, quiero comprar la INSTALACIÓN DE OFFICE – Estudiante ($390).">Comprar por WhatsApp</button>
+      </div>
+    </div>
+    <p class="note">* Para el precio de estudiante, se puede solicitar comprobante de estudios.</p>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="wrap rev">
+    <h2>¿Cómo <span class="grad">funciona</span>?</h2>
+    <p class="sub">Tres pasos y listo.</p>
+    <div class="steps">
+      <div class="step"><h3>Escríbenos</h3><p>Elige el servicio y presiona el botón: se abre WhatsApp con tu mensaje.</p></div>
+      <div class="step"><h3>Agenda</h3><p>Coordinamos día y hora, en sitio o a distancia, según el servicio.</p></div>
+      <div class="step"><h3>Disfruta</h3><p>Recibes tu equipo o tu Office funcionando y con soporte.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap rev faq">
+    <h2>Preguntas <span class="grad">frecuentes</span></h2>
+    <p class="sub">Lo que más nos preguntan.</p>
+    <details><summary>¿Cómo compro?</summary><p>Presiona “Comprar por WhatsApp” en el plan que te corresponda y se abrirá una conversación con el mensaje ya escrito.</p></details>
+    <details><summary>¿Quién puede pagar el precio de estudiante?</summary><p>Estudiantes de cualquier nivel. Podemos pedirte un comprobante de estudios.</p></details>
+    <details><summary>¿Qué incluye la instalación?</summary><p>Instalación, activación, configuración inicial y soporte posterior.</p></details>
+    <details><summary>¿Reparan laptops y computadoras de escritorio?</summary><p>Sí, ambas. Escríbenos con los detalles de la falla para cotizar.</p></details>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap rev">
+    <h2>¿Listo para <span class="grad">empezar</span>?</h2>
+    <p class="sub" style="margin-inline:auto">Cuéntanos qué necesitas y te respondemos por WhatsApp.</p>
+    <div class="cta">
+      <a href="#" class="btn wa" data-wa="Hola, necesito ayuda con mi equipo / instalación de Office.">💬 Chatear por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="y"></span> Tecnoservicios · Reparación, mantenimiento e instalación de Office</footer>
+
+<a href="#" class="fab" data-wa="Hola, quiero información sobre sus servicios." aria-label="WhatsApp">💬</a>
+
+<script>
+/* ====== CONFIGURA AQUÍ TU WHATSAPP ======
+   Formato: código de país + número, sin +, espacios ni guiones.
+   México: 52 + 10 dígitos. Ejemplo: "5215512345678" */
+const WHATSAPP_NUMBER = "52XXXXXXXXXX";
+
+document.getElementById("y").textContent = new Date().getFullYear();
+
+// Botones de WhatsApp con mensaje predeterminado
+document.querySelectorAll("[data-wa]").forEach(el=>{
+  el.addEventListener("click",e=>{
+    e.preventDefault();
+    const url = "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(el.dataset.wa);
+    window.open(url,"_blank","noopener");
+  });
+});
+
+// Efecto ripple en botones
+document.querySelectorAll(".btn").forEach(b=>{
+  b.addEventListener("click",e=>{
+    const r=b.getBoundingClientRect(), s=document.createElement("span"), d=Math.max(r.width,r.height);
+    s.className="ripple"; s.style.width=s.style.height=d+"px";
+    s.style.left=(e.clientX-r.left-d/2)+"px"; s.style.top=(e.clientY-r.top-d/2)+"px";
+    b.appendChild(s); setTimeout(()=>s.remove(),600);
+  });
+});
+
+// Pestañas
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    document.getElementById(t.dataset.tab).classList.add("active");
+  });
+});
+
+// Aparecer al hacer scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("show");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rev").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
